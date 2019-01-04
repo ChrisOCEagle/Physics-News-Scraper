@@ -3,9 +3,9 @@ const cheerio = require('cheerio'),
 
 module.exports = function(app) {
     // the route for the homepage
-    app.get("/", (req, res) => {
-        res.render("index");
-    });
+    app.get("/", (req, res) => res.render("index"));
+    // the route for the saved articles
+    app.get("/saved", (req, res) => res.render("saved"));
     // the route for scraping https://physicsworld.com/
     app.get("/scrape", (req, res) => {
         // first we grab the body of the html with axios
