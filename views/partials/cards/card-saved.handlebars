@@ -1,15 +1,17 @@
 {{#if articles}}
     {{#each articles}}
-        <div class="card">
-            <div class="card-header">
-                <h3>
-                    <a class="article-link" href="{{link}}">{{headline}}</a>
-                    <a class="btn btn-primary delete-save">Delete from Saved</a>
-                    <a class="btn btn-primary article-comments">Article Comments</a>
-                </h3>
+        {{#if saved}}
+            <div class="card">
+                <div class="card-header">
+                    <h3>
+                        <a class="article-link" href="{{link}}">{{headline}}</a>
+                        <button class="btn btn-primary" id="delete" data-id="{{id}}" data-newsaved="{{save}}">Delete from Saved</button>
+                        <a class="btn btn-primary article-comments">Article Comments</a>
+                    </h3>
+                </div>
+                <div class="card-body">{{summary}}</div>
             </div>
-            <div class="card-body">{{summary}}</div>
-        </div>
+        {{/if}}
     {{/each}}
 {{else}}
     <div class="card">

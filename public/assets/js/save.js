@@ -1,12 +1,16 @@
 // wait until the DOM is fully loaded to attach our handlers
-$(() => {
-    $(".save").on("click", event => {
+$(function() {
+    ajaxPutRequest("save");
+    ajaxPutRequest("delete");
+});
+
+function ajaxPutRequest(id) {
+    $("#" + id).on("click", function(event) {
         var id = $(this).data("id"),
             newSaved = $(this).data("newsaved"),
             newSavedState = {
                 saved: newSaved
             };
-            console.log(newSaved);
         $.ajax("/api/article/" + id, {
             type:"PUT",
             data: newSavedState
@@ -16,4 +20,4 @@ $(() => {
         }
         );
     });
-});
+}

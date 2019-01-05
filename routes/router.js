@@ -70,10 +70,22 @@ module.exports = function(app) {
             res.redirect("/");
         });
     });
-    // the route for saving an article
+    // the route for saving/deleting an article
     app.put("/api/article/:id", (req, res) => {
-        db.Article.findOneAndUpdate({ _id: req.params.id }, {$set: {saved: true}})
-        .then(() => res.redirect("/saved"))
-        .catch(err => console.log(err));
+        db.Article.findOne({ _id: req.params.id })
+        .then(function(dbArticle) {
+            if (dbArticle.saved === true) {
+                db.Article
+                .updateOne({ _id: req.params.id }, {$set: { saved: false } })
+                .then(() => res.redirect("/saved"))
+                .catch(err => console.log(err))
+            } else if (dbArticle.saved === false) {
+                db.Article
+                .updateOne({ _id: req.params.id }, {$set: { saved: true } })
+                .then(() => res.redirect("/saved"))
+                .catch(err => console.log(err))
+            }
+        })
+        .catch(err => console.log(err));    
     });
 };

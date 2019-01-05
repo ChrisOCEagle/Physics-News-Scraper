@@ -5,13 +5,14 @@
         {{> navbar/nav save=false}}
     {{/if}}
 </nav>
+
 <h1>Mongo Scraper</h1>
 <h3>Physics Edition</h3>
 
 <div class="container-fluid article-container">
     {{#if savedRoute}}
-        {{> cards/card-saved save=true}}
+        {{> cards/card-saved save=false}}
     {{else}}
-        {{> cards/card-home save=false}}
+        {{> cards/card-home save=true}}
     {{/if}}
 </div>
