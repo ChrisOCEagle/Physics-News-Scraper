@@ -8,30 +8,10 @@
 <h1>Mongo Scraper</h1>
 <h3>Physics Edition</h3>
 
-{{!-- <div class="container-fluid article-container">
-    {{#if articles}}
-        {{#if saved}}
-            {{cards/card-block save=true}}
-        {{else}}
-            {{cards/card/block save=false}}
-        {{/if}}
+<div class="container-fluid article-container">
+    {{#if savedRoute}}
+        {{> cards/card-saved}}
     {{else}}
-        <div class="card">
-            <div class="card-header">
-                <h3>
-                    Uh Oh. Looks like we don't have any new articles.
-                </h3>
-            </div>
-            <div class="card-body"></div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h3>What would you like to do?</h3>
-            </div>
-            <div class="card-body">
-                <a href="/scrape">Try getting some new articles.</a>
-                <a href="/saved">Go to saved articles.</a>
-            </div>
-        </div>
+        {{> cards/card-home}}
     {{/if}}
-</div> --}}
+</div>
