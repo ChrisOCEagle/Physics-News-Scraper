@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 // using the schema constructor create a new schema that will hold all the scraped articles
 const ArticleSchema = new Schema({
     // title is required and of type string
-    title: {
+    headline: {
         type: String,
         required: true
     },
@@ -20,6 +20,11 @@ const ArticleSchema = new Schema({
         type: String,
         required: true
 
+    },
+    // saved is type boolean and has a default value of false
+    saved: {
+        type: Boolean,
+        default: false
     },
     // comment is an object that stores a comment id
     // the ref property links the ObjectId to the Comment model

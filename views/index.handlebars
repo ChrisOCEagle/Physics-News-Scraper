@@ -3,7 +3,40 @@
     <a href="/">Home</a>
     <a href="/saved">Saved Articles</a>
     <a href="/scrape">Get new articles!</a>
-    <a href="#">Clear articles!</a>
+    <a href="/clear">Clear articles!</a>
 </nav>
 <h1>Mongo Scraper</h1>
 <h3>Physics Edition</h3>
+<div class="container-fluid article-container">
+    {{#if articles}}
+        {{#each articles}}
+            <div class="card">
+                <div class="card-header">
+                    <h3>
+                        <a class="article-link" href="{{link}}">{{headline}}</a>
+                        <a class="btn btn-primary save">Save</a>
+                    </h3>
+                </div>
+                <div class="card-body">{{summary}}</div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div class="card">
+            <div class="card-header">
+                <h3>
+                    Uh Oh. Looks like we don't have any new articles.
+                </h3>
+            </div>
+            <div class="card-body"></div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3>What would you like to do?</h3>
+            </div>
+            <div class="card-body">
+                <a href="/scrape">Try getting some new articles.</a>
+                <a href="/saved">Go to saved articles.</a>
+            </div>
+        </div>
+    {{/if}}
+</div>
