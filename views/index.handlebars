@@ -16,3 +16,9 @@
         {{> cards/card-home save=true}}
     {{/if}}
 </div>
+
+<div class="comments">
+    {{#if savedRoute}}
+        {{> modals/modal}}
+    {{/if}}
+</div>
