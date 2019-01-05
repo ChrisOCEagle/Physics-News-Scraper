@@ -5,8 +5,10 @@ const cheerio = require('cheerio'),
 module.exports = function(app) {
     // the route for the homepage
     app.get("/", (req, res) => {
-        if (db.Article.count({}) != 0) {
-            db.Article.find({}).then(dbArticle => {
+        if (db.Article.count({ saved: false }) != 0) {
+            db.Article
+            .find({ saved: false })
+            .then(dbArticle => {
                 res.render("index", {
                     articles: dbArticle,
                     savedRoute: false
@@ -28,9 +30,9 @@ module.exports = function(app) {
     });
     // the route for the saved articles
     app.get("/saved", (req, res) => {
-        if (db.Article.count({where: {saved: true}}) != 0) {
+        if (db.Article.count({ saved: true }) != 0) {
             db.Article
-            .find({where: {saved: true}})
+            .find({ saved: true })
             .then(dbSavedArticle => res.render("index", {
                 articles: dbSavedArticle,
                 savedRoute: true
@@ -67,5 +69,11 @@ module.exports = function(app) {
             });
             res.redirect("/");
         });
+    });
+    // the route for saving an article
+    app.put("/api/article/:id", (req, res) => {
+        db.Article.findOneAndUpdate({ _id: req.params.id }, {$set: {saved: true}})
+        .then(() => res.redirect("/saved"))
+        .catch(err => console.log(err));
     });
 };

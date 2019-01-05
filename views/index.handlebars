@@ -10,8 +10,8 @@
 
 <div class="container-fluid article-container">
     {{#if savedRoute}}
-        {{> cards/card-saved}}
+        {{> cards/card-saved save=true}}
     {{else}}
-        {{> cards/card-home}}
+        {{> cards/card-home save=false}}
     {{/if}}
 </div>
