@@ -8,12 +8,14 @@ module.exports = function(app) {
         if (db.Article.count({}) != 0) {
             db.Article.find({}).then(dbArticle => {
                 res.render("index", {
-                    articles: dbArticle
+                    articles: dbArticle,
+                    savedRoute: false
                 });
             }).catch(err => res.json(err));
         } else {
             res.render("index", {
-                articles: {}
+                articles: {},
+                savedRoute: false
             });
         }
     });
@@ -25,7 +27,22 @@ module.exports = function(app) {
         .catch(err => console.log(err));
     });
     // the route for the saved articles
-    app.get("/saved", (req, res) => res.render("saved"));
+    app.get("/saved", (req, res) => {
+        if (db.Article.count({where: {saved: true}}) != 0) {
+            db.Article
+            .find({where: {saved: true}})
+            .then(dbSavedArticle => res.render("index", {
+                articles: dbSavedArticle,
+                savedRoute: true
+            }))
+            .catch(err => console.log(err));
+        } else {
+            res.render("index", {
+                articles: {},
+                savedRoute: true
+            });
+        }
+    });
     // the route for scraping https://physicsworld.com/
     app.get("/scrape", (req, res) => {
         // first we grab the body of the html with axios
