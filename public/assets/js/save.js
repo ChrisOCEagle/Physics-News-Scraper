@@ -6,6 +6,7 @@ $(function() {
 
 function ajaxPutRequest(id) {
     $("#" + id).on("click", function(event) {
+        event.preventDefault();
         var id = $(this).data("id"),
             newSaved = $(this).data("newsaved"),
             newSavedState = {
