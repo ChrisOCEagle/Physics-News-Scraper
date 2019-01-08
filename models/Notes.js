@@ -4,14 +4,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // using the schema constructor create a new schema that will hold all the scraped articles
-const CommentSchema = new Schema({
-    // title is of type string
-    title: String,
+const NoteSchema = new Schema({
     // body is of type string
     body: String
 });
 
 // this creates our model from the above schema, using mongoose's model method
-const Comment = mongoose.model("Comment", CommentSchema);
+const Note = mongoose.model("Note", NoteSchema);
 
-module.exports = Comment;
+module.exports = Note;

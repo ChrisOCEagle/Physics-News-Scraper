@@ -1,0 +1,8 @@
+{{#each articles}}
+    {{#if saved}}
+        <form>
+            <textarea type="text" name="text" id="Article-Comment" cols="30" rows="10" placeholder="Comment"></textarea>
+            <button type="submit" id="save-comment" data-id="{{id}}">Save Comment</button>
+        </form>
+    {{/if}}
+{{/each}}

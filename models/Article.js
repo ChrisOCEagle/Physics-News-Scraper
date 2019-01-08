@@ -29,9 +29,9 @@ const ArticleSchema = new Schema({
     // comment is an object that stores a comment id
     // the ref property links the ObjectId to the Comment model
     // this allows us to populate the Article with an associated Comment
-    comment: {
+    note: {
         type: Schema.Types.ObjectId,
-        ref: "Comment"
+        ref: "Note"
     }
 });
 

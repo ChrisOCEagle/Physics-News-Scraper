@@ -70,7 +70,7 @@ module.exports = function(app) {
             res.redirect("/");
         });
     });
-    // the route for saving/deleting an article
+    // the route for saving/unsaving an article
     app.put("/api/article/:id", (req, res) => {
         db.Article.findOne({ _id: req.params.id })
         .then(function(dbArticle) {
@@ -87,5 +87,24 @@ module.exports = function(app) {
             }
         })
         .catch(err => console.log(err));    
+    });
+    // the route for grabbing a specific article by its id and populating it with its comment
+    app.get("/articles/:id", (req, res) => {
+        db.Article.findOne({ _id: req.params.id })
+        .populate("note")
+        .then(dbArticle => res.json(dbArticle))
+        .catch(err => console.log(err));
+    });
+    // the route for saving/updating an article's associated note
+    app.post("/articles/:id", (req, res) => {
+        // save the new note that gets posted to the notes collection
+        var newNote = req.body;
+        db.Note.create(newNote)
+        // then find an article from the req.params.id
+        // and update its "note" property with the _id of the new note
+        .then(dbNote => {
+            db.Article
+            .findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+        });
     });
 };
